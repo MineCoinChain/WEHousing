@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>爱家-实名认证</title>
+    <link href="./plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/reset.css" rel="stylesheet">
+    <link href="./plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="./css/ihome/main.css" rel="stylesheet">
+    <link href="./css/ihome/profile.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="nav-bar">
+                <h3 class="page-title">实名认证</h3>
+                <a class="nav-btn fl" href="/my.html"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
+            </div>
+        </div>
+        <div class="menus-con">
+            <ul class="menus-list">
+                <li>
+                    <div class="menu-title">
+                        <h3>认证信息</h3>
+                    </div>
+                    <div class="menu-content">
+                        <form id="form-auth" method="post">
+                            <div class="form-group">
+                                <label for="real-name">真实姓名</label>
+                                <input type="text" class="form-control" name="real_name" id="real-name" >
+                            </div>
+                            <div class="form-group">
+                                <label for="id-card">身份证号码</label>
+                                <input type="text" class="form-control" name="id_card" id="id-card">
+                            </div> 
+                            <div class="error-msg"><i class="fa fa-exclamation-circle"></i>信息填写不完整，请补全信息</div>
+                            <input type="submit" class="btn btn-success" value="保存">
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="popup_con">
+            <div class="popup">
+                <p>保存成功！</p>
+            </div>
+            
+            <div class="mask"></div>
+        </div>
+        <div class="footer">
+            <p><span><i class="fa fa-copyright"></i></span>爱家租房&nbsp;&nbsp;享受家的温馨</p>
+        </div> 
+    </div>
+    
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.form.min.js"></script>
+    <script src="./plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="./js/ihome/auth.js"></script>
+</body>
+</html>

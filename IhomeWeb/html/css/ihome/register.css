@@ -1,0 +1,77 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #fff;
+}
+.container {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.logo-bar {
+    width: 128px;
+    height: 59px;
+    margin: 10px auto;
+}
+.form-register {
+    max-width: 330px;
+    padding: 10px;
+    margin: 0 auto;
+}
+.input-group-addon {
+    background-color: #fff; 
+    color: #959ea7;
+    padding: 6px;
+}
+.input-group-addon, .form-control {
+    border: 1px solid #dcdbdb;
+}
+.fa-fw {
+    width: 30px;
+}
+.phonecode {
+    background-color: #eeedf1;
+    padding: 6px 4px;
+    width: 90px;
+    text-align: center;
+}
+.phonecode-a {
+    font-size: 16px;
+    color: #797878;
+}
+.phonecode-a:focus, .phonecode-a:hover {
+    text-decoration: none;
+    color: #797878;
+}
+.form-register .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-register .form-control:focus {
+  z-index: 2;
+}
+.login-a {
+    text-align: right;
+    margin-top: 16px;
+    font-size: 14px;
+}
+.image-code {
+    padding: 0;
+}
+.image-code img{
+    width: 90px;
+    height: 41px;
+}
+.error-msg {
+    display: none;
+    font-size: 14px;
+    color: red;
+    margin: -10px 0px 10px 50px;
+}
+.error-msg i {
+    margin-right: 5px;
+}

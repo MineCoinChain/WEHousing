@@ -1,0 +1,194 @@
+body {
+    background-color: #fff;
+}
+.container {
+    padding: 0px;
+}
+.top-bar {
+    position: fixed;
+    width: 100%;
+    background-color: #eee;
+    z-index: 2;
+}
+.nav-bar {
+    width: 100%;
+    height: 35px; 
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+.page-title {
+    display: block;
+    line-height: 35px;
+    font-size: 20px;
+}
+.nav-btn {
+    position: absolute; 
+    top: 0;
+    left: 10px;
+    color: #000;
+    font-size: 16px;
+}
+.swiper-container, .swiper-slide img, .landlord-pic>img {
+    width: 100%;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 0px;
+}
+.swiper-pagination {
+    text-align: right;
+    font-size: 14px;
+    color: #fff;
+    padding-right: 10px;
+}
+.house-price {
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+    height: 42px;
+    padding: 0 12px;
+    line-height: 42px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 14px;
+    z-index: 1;
+}
+.house-price>span {
+    font-size: 30px;
+}
+.detail-con {
+    padding: 10px;
+    background-color: #eee;
+}
+.layout-style {
+    background-color: #fff;
+    margin-top: 2px;
+}
+.detail-header {
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+}
+.landlord-pic {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; 
+    overflow: hidden;
+}
+.house-title {
+    font-size: 16px;
+    padding: 10px;
+}
+.landlord-name {
+    font-size: 14px;
+    padding: 5px;
+}
+.house-type>li {
+    padding: 10px 10px 10px 45px;
+}
+.icon-text {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 13px;
+    color: #999;
+}
+.icon-text>h3 {
+    font-size: 14px;
+    color: #000;
+}
+.icon-house, .icon-sofa, .icon-bed, .icon-room, .icon-user, .wirelessnetwork-ico, .wirednetwork-ico, .shower-ico, .tv-ico, .aircondition-ico, .heater-ico, .smoke-ico, .drinking-ico, .brush-ico, .soap-ico, .slippers-ico, .toiletpaper-ico, .towel-ico, .toiletries-ico, .icebox-ico, .washer-ico, .hotbathtub-ico, .elevator-ico, .iscook-ico, .pet-ico, .meet-ico, .accesssys-ico, .parkingspace-ico, .jinzhi-ico {
+    background: url(/static/images/houseicon_sprite.png) 0 0 no-repeat;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+.icon-user {
+    background-position: 0 -163px;
+}
+.icon-bed {
+    background-position: 0 -206px;
+}
+.icon-house, .icon-user, .icon-bed {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: top;
+}
+.wirelessnetwork-ico{ background-position:0 -716px; height:16px;}
+.wirednetwork-ico{ background-position:0 -888px; height:18px;}
+.shower-ico{ background-position:0 -464px; height:20px;}
+.tv-ico{ background-position:0 -344px; height:16px;}
+.aircondition-ico{ background-position:0 -433px; height:20px;}
+.heater-ico{ background-position:0 -587px; height:20px;}
+.smoke-ico{ background-position:0 -804px; height:20px;}
+.drinking-ico{ background-position:0 -858px; height:20px;}
+.brush-ico{ background-position:0 -831px; height:20px;}
+.soap-ico{ background-position:0 -743px; height:16px;}
+.slippers-ico{ background-position:0 -684px; height:20px;}
+.toiletpaper-ico{ background-position:0 -619px; height:20px;}
+.towel-ico{ background-position:0 -496px; height:20px;}
+.toiletries-ico{ background-position:0 -555px; height:20px;}
+.icebox-ico{ background-position:0 -280px; height:20px;}
+.washer-ico{ background-position:0 -771px; height:20px;}
+.hotbathtub-ico{ background-position:0 -915px; height:20px;}
+.elevator-ico{ background-position:0 -372px; height:20px;}
+.iscook-ico{ background-position:0 -944px; height:18px;}
+.pet-ico{ background-position:0 -312px; height:20px;}
+.meet-ico{ background-position:0 -404px; height:18px;}
+.accesssys-ico{ background-position:0 -527px; height:16px;}
+.parkingspace-ico{ background-position:0 -652px; height:21px;}
+.jinzhi-ico{ background-position:0 -248px; height:20px;}
+.house-info, .house-facility {
+    padding: 10px 10px 0;
+    font-size: 14px;
+    color: #999;
+}
+.house-info>h3, .house-facility>h3 {
+    font-size: 16px;
+    text-align: center;
+    color: #000;
+}
+.house-info-list, .house-facility-list {
+    margin-top: 10px;
+}
+.house-info-list>li {
+    height: 38px;
+    line-height: 38px;
+    border-bottom: 1px solid #eee;
+}
+.house-info-list>li>span {
+    float: right;
+    color: #333;
+}
+.house-comment-list {
+   border-bottom: 1px solid #eee; 
+}
+.house-facility-list>li {
+    float: left;
+    width: 50%;
+    height: 39px;
+    line-height: 39px;
+    padding-left: 12px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+    color: #666;
+}
+.book-house {
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    background-color: #ff6666;
+    color: #fff;
+    text-align: center;
+}
+.book-house:hover {
+    text-decoration: none;
+    color: #fff;
+}

@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
-
-	"github.com/micro/go-micro/client"
 	example "github.com/micro/examples/template/srv/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"

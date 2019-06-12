@@ -1,0 +1,18 @@
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,select,form,ul,ol,input,textarea,header{margin:0;padding:0}
+
+body{font-family:'Microsoft Yahei';font-size:12px;background-color:#efefef}
+
+ul,ol{list-style:none;}
+
+img{border:none;}
+
+a{text-decoration:none;}
+
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+
+.clearfix:before,.clearfix:after{content:"";display:table;}
+.clearfix:after{clear:both;}
+.clearfix{zoom:1;}
+
+.fl{float:left}
+.fr{float:right}

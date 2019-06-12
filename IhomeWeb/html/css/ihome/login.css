@@ -1,0 +1,56 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #fff;
+}
+.container {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.logo-bar {
+    width: 128px;
+    height: 59px;
+    margin: 10px auto;
+}
+.form-login {
+    max-width: 330px;
+    padding: 10px;
+    margin: 0 auto;
+}
+.input-group-addon {
+    background-color: #fff; 
+    color: #959ea7;
+    padding: 6px;
+}
+.input-group-addon, .form-control {
+    border: 1px solid #dcdbdb;
+}
+.fa-fw {
+    width: 30px;
+}
+.form-login .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-login .form-control:focus {
+  z-index: 2;
+}
+.register-a {
+    text-align: right;
+    margin-top: 16px;
+    font-size: 14px;
+}
+.error-msg {
+    display: none;
+    font-size: 14px;
+    color: red;
+    margin: -10px 0px 10px 50px;
+}
+.error-msg i {
+    margin-right: 5px;
+}

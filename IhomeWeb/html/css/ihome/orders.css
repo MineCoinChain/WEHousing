@@ -1,0 +1,94 @@
+body {
+    background-color: #eee;
+}
+.container {
+    padding: 0px;
+}
+.top-bar {
+    position: fixed;
+    width: 100%;
+    background-color: #eee;
+    z-index: 2;
+}
+.nav-bar {
+    width: 100%;
+    height: 35px; 
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+.page-title {
+    display: block;
+    line-height: 35px;
+    font-size: 20px;
+}
+.nav-btn {
+    position: absolute; 
+    top: 0;
+    left: 10px;
+    color: #000;
+    font-size: 16px;
+}
+.orders-con {
+    min-height: 100%;
+    margin-top: 38px;
+}
+.orders-list {
+    padding: 10px;
+}
+.orders-list>li {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.order-title {
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    color: #666;
+}
+.order-title>a {
+    color: #4f4f4f;
+    text-decoration: none;
+}
+.order-title>a :hover {
+    text-decoration: none;
+}
+.order-title>h3 {
+    display: inline;
+}
+.order-content {
+    background-color: #fff; 
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px;
+}
+.order-content>img {
+    width: 30%;
+    vertical-align: top;
+}
+.order-text {
+    display: inline-block;
+    width: 63%;
+    margin-left: 10px;
+}
+.order-text>h3 {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+}
+.order-text>ul>li {
+    height: 25px;
+    line-height: 25px;
+    color: #666;
+}
+.order-operate{
+    margin-top: -7px;
+}
+.order-reject {
+    margin-left: 10px;
+}

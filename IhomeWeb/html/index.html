@@ -1,68 +1,111 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>IhomeWeb Web</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    </head>
-    <body>
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        IhomeWeb Web
-                    </a>
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>爱家</title>
+    <link href="./plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/reset.css" rel="stylesheet">
+    <link href="./plugins/swiper/css/swiper.min.css" rel="stylesheet">
+    <link href="./plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="./css/ihome/main.css" rel="stylesheet">
+    <link href="./css/ihome/index.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <img class="logo fl" src="./images/logo@128x59.png">
+            <div class="register-login fr">
+                <a class="btn top-btn btn-theme" href="./register.html" style="float:right">注册</a>
+                <a class="btn top-btn btn-theme" href="./login.html" style="float:right">登录</a>
+            </div>
+            <div class="user-info fr"><span><i class="fa fa-user fa-lg"></i></span> <a class="user-name" href="/my.html"></a></div>
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            </div>
+            <script id="swiper-houses-tmpl" type="text/html">
+                {{each houses as house}}
+                <div class="swiper-slide">
+                    <a href="/detail.html?id={{house.house_id}}"><img src="{{house.img_url}}"></a>
+                    <div class="slide-title">{{house.title}}</div>
+                </div>
+                {{/each}}
+            </script>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="search-bar">
+            <button class="filter-btn" type="button" data-toggle="modal" data-target="#area-modal"><span class="fl" id="area-btn">选择城区</span><span class="fr"><i class="fa fa-map-marker fa-lg fa-fw"></i></span></button>
+            <button class="filter-btn" type="button" data-toggle="modal" data-target="#start-date-modal"><span class="fl" id="start-date-btn">入住日期</span><span class="fr"><i class="fa fa-calendar fa-lg fa-fw"></i></span></button>
+            <button class="filter-btn end-date" type="button" data-toggle="modal" data-target="#end-date-modal"><span class="fl" id="end-date-btn">离开日期</span><span class="fr"><i class="fa fa-calendar fa-lg fa-fw"></i></span></button>
+            <a class="btn search-btn btn-theme" href="#" onclick="goToSearchPage(this);" area-id="" start-date="" end-date="">搜索</a>
+            <div class="modal fade" id="area-modal" tabindex="-1" role="dialog" aria-labelledby="area-label">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="area-label">选择城区</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="area-list">
+                            </div>
+                            <script id="area-list-tmpl" type="text/html">
+                            {{each areas as area}}
+                                <a href="#" area-id="{{area.aid}}">{{area.aname}}</a>
+                            {{/each}}
+                            </script>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <h1>IhomeWeb Web</h1>
-                    <form class="example">
-                        <div class="form-group">
-                            <label>Enter your name</label>
-                            <input type=text class="form-control" id="name" name="name" placeholder="John">
-                         </div>
-                        <button class="btn btn-default">Submit</button>
-                    </form>
+            <div class="modal fade" id="start-date-modal" tabindex="-1" role="dialog" aria-labelledby="start-date-label">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="start-date-label">入住日期</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="date-select" id="start-date"></div>
+                            <input type="hidden" id="start-date-input">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-theme" onclick="setStartDate();">确定</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="message"></div>
+            <div class="modal fade" id="end-date-modal" tabindex="-1" role="dialog" aria-labelledby="end-date-label">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="end-date-label">离开日期</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="date-select" id="end-date"></div>
+                            <input type="hidden" id="end-date-input">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-theme" onclick="setEndDate();">确定</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-        <!-- You may want to store this in a separate file -->
-        <script type="text/javascript">
-            $(".example").submit(function(e) {
-                e.preventDefault();
-
-		var url = window.location.href.replace(/\/$/, "") + "/example/call";
-                var data = $(this).serializeArray()[0];
-                var name = data.value;
-                if (name.length == 0) {
-                    name = "John";
-                };
-
-                $.ajax({
-                    method: "POST",
-                    dataType: "json",
-                    contentType: "application/json",
-                    url: url,
-                    data: JSON.stringify({name: name}),
-                    success: function(data) {
-                        $('.message').html('<h3>'+data.msg+'</h3>');
-                    },
-                });
-            });
-        </script>
-    </body>
+        <div class="footer">
+            <p><span><i class="fa fa-copyright"></i></span>爱家租房&nbsp;&nbsp;享受家的温馨</p>
+        </div>
+    </div>
+    
+    <script src="./js/jquery.min.js"></script>
+    <script src="./plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./plugins/swiper/js/swiper.jquery.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="./js/template.js"></script>
+    <script src="./js/ihome/index.js"></script>
+</body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>爱家-我的订单</title>
+    <link href="./plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/reset.css" rel="stylesheet">
+    <link href="./plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="./css/ihome/main.css" rel="stylesheet">
+    <link href="./css/ihome/orders.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="nav-bar">
+                <h3 class="page-title">客户订单</h3>
+                <a class="nav-btn fl" href="/my.html"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
+            </div>
+        </div>
+        <div class="orders-con">
+            <ul class="orders-list">
+            </ul>
+            <script id="orders-list-tmpl" type="text/html">
+                {{if orders}}
+                {{each orders as order}}
+                <li order-id={{order.order_id}}>
+                    <div class="order-title">
+                        <h3>订单编号：{{order.order_id}}</h3>
+                        {{ if "WAIT_ACCEPT" == order.status }}
+                        <div class="fr order-operate">
+                            <button type="button" class="btn btn-success order-accept" data-toggle="modal" data-target="#accept-modal">接单</button>
+                            <button type="button" class="btn btn-danger order-reject" data-toggle="modal" data-target="#reject-modal">拒单</button>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="order-content">
+                        <img src="{{order.img_url}}">
+                        <div class="order-text">
+                            <h3>{{order.title}}</h3>
+                            <ul>
+                                {{ if  false== order.credit }}
+                                    <li style="color: red">警告：该用户个人征信记录不良请慎重考虑</li>
+
+                                {{/if}}
+                                <li>创建时间：{{order.ctime}}</li>
+                                <li>入住日期：{{order.start_date}}</li>
+                                <li>离开日期：{{order.end_date}}</li>
+                                <li>合计金额：￥{{(order.amount/100.0).toFixed(0)}}(共{{order.days}}晚)</li>
+                                <!--可以写1个客户的征信情况-->
+
+                                <li>订单状态：
+                                    <span>
+                                        {{if "WAIT_ACCEPT" == order.status}}
+                                            待接单
+                                        {{else if "WAIT_COMMENT" == order.status}}
+                                            待评价
+                                        {{else if "COMPLETE" == order.status}}
+                                            已完成
+                                        {{else if "REJECTED" == order.status}}
+                                            已拒单
+                                        {{/if}}
+                                    </span>
+                                </li>
+                                {{if "COMPLETE" == order.status}}
+                                <li>我的评价： {{order.comment}}</li>
+                                {{else if "REJECTED" == order.status}}
+                                <li>拒单原因： {{order.comment}}</li>
+                                {{/if}}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+                {{else}}
+                暂时没有订单。
+                {{/if}}
+            </script>
+            <div class="modal fade" id="accept-modal" tabindex="-1" role="dialog" aria-labelledby="accept-label">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">操作提示</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>您确定接此订单吗？</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary modal-accept">确定接单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog" aria-labelledby="reject-label">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">请输入拒接单原因</h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="form-control" rows="3" id="reject-reason" placeholder="此处必须填写原因"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary modal-reject">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p><span><i class="fa fa-copyright"></i></span>爱家租房&nbsp;&nbsp;享受家的温馨</p>
+        </div> 
+    </div>
+    
+    <script src="./js/jquery.min.js"></script>
+    <script src="./plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="./js/template.js"></script>
+    <script src="./js/ihome/lorders.js"></script>
+</body>
+</html>

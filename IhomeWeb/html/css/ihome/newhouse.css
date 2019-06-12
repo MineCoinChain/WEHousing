@@ -1,0 +1,108 @@
+body {
+    background-color: #eee;
+}
+.container {
+    padding: 0px;
+}
+.top-bar {
+    position: fixed;
+    width: 100%;
+    background-color: #eee;
+    z-index: 2;
+}
+.nav-bar {
+    width: 100%;
+    height: 35px; 
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+.page-title {
+    display: block;
+    line-height: 35px;
+    font-size: 20px;
+}
+.nav-btn {
+    position: absolute; 
+    top: 0;
+    left: 10px;
+    color: #000;
+    font-size: 16px;
+}
+.houses-con {
+    min-height: 100%;
+    margin-top: 38px;
+}
+.houses-list {
+    padding: 10px;
+}
+.houses-list>form>li {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.house-title, .new-house {
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    color: #666;
+}
+.new-house {
+    border-radius: 5px;
+    text-align: center;
+}
+.new-house>a {
+    font-size: 16px;
+    text-decoration: none;
+    color: green;
+}
+.house-content {
+    background-color: #fff; 
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px;
+}
+.house-image-cons>img {
+    width: 100%;
+    vertical-align: top;
+    margin-bottom: 10px;
+}
+.house-facility-list>li {
+    float: left;
+    width: 50%;
+    height: 39px;
+    padding-left: 12px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+    color: #666;
+}
+.btn-commit {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+#form-house-image {
+    display: none;
+}
+.error-msg {
+    display: none;
+    font-size: 14px;
+    color: red;
+}
+.error-msg i {
+    margin-right: 5px;
+}
+.popup_con{display:none;}
+.popup{width:300px;height:150px;position:fixed;
+    left:50%;
+    margin-left:-150px;
+    top:50%;
+    margin-top:-75px;
+    z-index:1000;
+}
+
+.popup p{height:150px;line-height:150px;text-align:center;font-size:18px;}
+
+.mask{width:100%;height:100%;position:fixed;left:0;top:0;background-color:#000;opacity:0.3;z-index:999;}

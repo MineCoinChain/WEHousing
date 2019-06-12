@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>爱家-个人信息</title>
+    <link href="./plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/reset.css" rel="stylesheet">
+    <link href="./plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="./css/ihome/main.css" rel="stylesheet">
+    <link href="./css/ihome/profile.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="nav-bar">
+                <h3 class="page-title">个人信息</h3>
+                <a class="nav-btn fl" href="/my.html"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
+            </div>
+        </div>
+        <div class="menus-con">
+            <ul class="menus-list">
+                <li>
+                    <div class="menu-title">
+                        <h3>头像</h3>
+                    </div>
+                    <div class="menu-content">
+                        <img id="user-avatar" src="">
+                        <div class="menu-text">
+                            <form id="form-avatar" action="/api/v1.0/avatar" enctype="multipart/form-data">
+                                选择头像：<input type="file" accept="image/*" name="avatar">
+                                <!--<input type="hidden" id="avatar_xsrf" name="_xsrf" value="">-->
+                                <input type="submit" class="btn btn-success" value="上传">
+                            </form>
+                        </div> 
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-title">
+                        <h3>用户名</h3>
+                    </div>
+                    <div class="menu-content">
+                        <form id="form-name" action="/api/profile/name" method="post">
+                            <input type="text" name="name" id="user-name">
+                            <input type="submit" class="btn btn-success" value="保存">
+                        </form>
+                        <div class="error-msg"><i class="fa fa-exclamation-circle"></i>用户名已存在，请重新设置</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="popup_con">
+            <div class="popup">
+                <p>保存成功！</p>
+            </div>
+            
+            <div class="mask"></div>
+        </div>
+        <div class="footer">
+            <p><span><i class="fa fa-copyright"></i></span>爱家租房&nbsp;&nbsp;享受家的温馨</p>
+        </div> 
+    </div>
+    
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.form.min.js"></script>
+    <script src="./plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="./plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="./js/ihome/profile.js?v=5"></script>
+</body>
+</html>

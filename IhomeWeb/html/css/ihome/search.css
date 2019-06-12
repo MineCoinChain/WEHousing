@@ -1,0 +1,163 @@
+body {
+    background-color: #fff;
+}
+.container {
+    padding: 0px;
+}
+.top-bar {
+    position: fixed;
+    width: 100%;
+    background-color: #eee;
+    z-index: 2;
+}
+.nav-bar {
+    width: 100%;
+    height: 35px; 
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+.page-title {
+    display: block;
+    line-height: 35px;
+    font-size: 20px;
+}
+.nav-btn {
+    position: absolute; 
+    top: 0;
+    left: 10px;
+    color: #000;
+    font-size: 16px;
+}
+.filter-title-bar {
+    height: 35px; 
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+.filter-title {
+    display: inline-block;
+    width: 32%;
+    height: 35px;
+    line-height: 35px;
+}
+.split-line {
+    color: #eee;
+    font-size: 26px;
+    margin-top: -2px; 
+    font-weight: 100;
+}
+.filter-item {
+    display: none;
+}
+.filter-item.active {
+    display: block; 
+}
+.filter-date {
+    margin: 10px;
+}
+.input-daterange>input {
+    font-size: 14px;
+}
+.filter-area {
+    margin-top: 5px;
+}
+.filter-area li {
+    padding: 0 9px;
+    margin: 0 6px 6px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;    
+    background-color: #fff;
+    border-radius: 3px;
+    font-size: 14px;
+    box-shadow: 0 1px 1px #ddd;
+    color: #333;
+}
+.filter-area li.active {
+    background-color: #ff6666;
+    color: #fff;
+}
+.filter-sort li{
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+.filter-sort li.active{
+    background-color: #ff6666;
+    color: #fff;
+}
+.display-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+}
+.house-list {
+    padding-top: 70px;
+}
+.house-item {
+    position: relative;
+    background-color: #eee;
+}
+.house-item img{
+    width: 100%;
+}
+.landlord-pic {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 10px;
+    bottom: 43px;
+    border-radius: 50%; 
+    overflow: hidden;
+    border: 3px solid #fff;
+}
+.house-price {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    height: 42px;
+    padding: 0 12px;
+    line-height: 42px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 14px;
+}
+.house-price>span {
+    font-size: 30px;
+}
+.house-intro {
+    padding: 5px 10px;
+    line-height: 20px;
+}
+.house-title {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: #333; 
+}
+.house-intro>em {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: normal;
+}
+
+
