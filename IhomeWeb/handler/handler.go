@@ -8,9 +8,11 @@ import (
 
 	"github.com/micro/go-micro/client"
 	example "github.com/micro/examples/template/srv/proto/example"
+	"github.com/julienschmidt/httprouter"
+	"github.com/micro/go-grpc"
 )
 
-func ExampleCall(w http.ResponseWriter, r *http.Request) {
+func ExampleCall(w http.ResponseWriter, r *http.Request,params httprouter.Params) {
 	// decode the incoming request as json
 	var request map[string]interface{}
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
@@ -18,8 +20,10 @@ func ExampleCall(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cli:=grpc.NewService()
+	cli.Init()
 	// call the backend service
-	exampleClient := example.NewExampleService("go.micro.srv.template", client.DefaultClient)
+	exampleClient := example.NewExampleService("go.micro.srv.template", cli.Client())
 	rsp, err := exampleClient.Call(context.TODO(), &example.Request{
 		Name: request["name"].(string),
 	})
