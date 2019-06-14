@@ -7,6 +7,7 @@ import (
         _ "sss/IhomeWeb/model"
 
         "net/http"
+        "sss/IhomeWeb/handler"
 )
 
 func main() {
@@ -22,9 +23,11 @@ func main() {
         }
         //构建路由
 		rou:=httprouter.New()
-		//rou.GET("/example/call", handler.ExampleCall)
+
 		//将路由注册到服务
 		rou.NotFound = http.FileServer(http.Dir("html"))
+        rou.GET("/api/v1.0/areas",handler.GetArea)
+
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

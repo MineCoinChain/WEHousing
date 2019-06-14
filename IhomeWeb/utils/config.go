@@ -23,7 +23,7 @@ var (
 
 func InitConfig() {
 	//从配置文件读取配置信息
-	appconf, err := config.NewConfig("ini", "./conf/app.conf")
+	appconf, err := config.NewConfig("ini", "/home/itcast/workspace/go/src/sss/IhomeWeb/conf/app.conf")
 	if err != nil {
 		beego.Debug(err)
 		return
