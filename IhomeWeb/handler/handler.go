@@ -45,3 +45,34 @@ func GetArea(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 		return
 	}
 }
+
+func GetSession(w http.ResponseWriter, r *http.Request,ps httprouter.Params) {
+
+	//准备返回给前端的map
+	response := map[string]interface{}{
+		"errno": "4101",
+		"errmsg": "用户未登录",
+	}
+	//设置返回数据的格式
+	w.Header().Set("Content-Type","application/json")
+	//将map转化为json 返回给前端
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+func GetIndex(w http.ResponseWriter, r *http.Request,ps httprouter.Params) {
+	//准备返回给前端的map
+	response := map[string]interface{}{
+		"errno": "0",
+		"errmsg": "ok",
+	}
+	//设置返回数据的格式
+	w.Header().Set("Content-Type","application/json")
+	//将map转化为json 返回给前端
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}

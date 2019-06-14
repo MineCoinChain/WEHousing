@@ -27,6 +27,10 @@ func main() {
 		//将路由注册到服务
 		rou.NotFound = http.FileServer(http.Dir("html"))
         rou.GET("/api/v1.0/areas",handler.GetArea)
+        //欺骗浏览器  session index
+        rou.GET("/api/v1.0/session", handler.GetSession)
+        //session
+        rou.GET("/api/v1.0/house/index", handler.GetIndex)
 
 		service.Handle("/",rou)
 		// 服务运行
