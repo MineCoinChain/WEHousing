@@ -7,6 +7,7 @@ import (
 	GETAREA "sss/GetArea/proto/example"
 	GETIMAGECD "sss/GetImageCd/proto/example"
 	GETSMSCD "sss/GetSmscd/proto/example"
+	POSTRET "sss/PostRet/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -156,9 +157,9 @@ func Getsmscd(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	cli.Init()
 	exampleClient := GETSMSCD.NewExampleService("go.micro.srv.GetSmscd", cli.Client())
 	rsp, err := exampleClient.GetSmscd(context.TODO(), &GETSMSCD.Request{
-		Mobile:mobile,
-		Text:text,
-		Id:uuid,
+		Mobile: mobile,
+		Text:   text,
+		Id:     uuid,
 	})
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -173,6 +174,67 @@ func Getsmscd(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	// encode and write the response as json
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+func PostRet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println(" 注册服务  PostRet  /api/v1.0/users")
+	//接受 前端发送过来数据的
+	var request map[string]interface{}
+	// 将前端 json 数据解析到 map当中
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	if request["mobile"].(string) == "" || request["password"].(string) == "" || request["sms_code"].(string) == "" {
+		response := map[string]interface{}{
+			"errno":  utils.RECODE_DATAERR,
+			"errmsg": utils.RecodeText(utils.RECODE_DATAERR),
+		}
+		//设置返回数据的格式
+		w.Header().Set("Content-Type", "application/json")
+		//将map转化为json 返回给前端
+		if err := json.NewEncoder(w).Encode(response); err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+	}
+
+	//创建 grpc 客户端
+	cli := grpc.NewService()
+	//客户端初始化
+	cli.Init()
+
+	//通过protobuf 生成文件 创建 连接服务端 的客户端句柄
+	exampleClient := POSTRET.NewExampleService("go.micro.srv.PostRet", cli.Client())
+	//通过句柄调用服务端函数
+	rsp, err := exampleClient.PostRet(context.TODO(), &POSTRET.Request{
+		Mobile:   request["mobile"].(string),
+		Password: request["password"].(string),
+		SmsCode:  request["sms_code"].(string),
+	})
+
+	//判断是否成功
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	//设置cookie
+	cookie, err := r.Cookie("ihomelogin")
+	if err != nil || cookie.Value == "" {
+		cookie := http.Cookie{Name: "ihomelogin", Value: rsp.Sessionid, MaxAge: 600, Path: "/"}
+		http.SetCookie(w, &cookie)
+	}
+	//将数据返回前端
+	response := map[string]interface{}{
+		"errno":  rsp.Errno,
+		"errmsg": rsp.Errmsg,
+	}
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(response); err != nil {
 		http.Error(w, err.Error(), 500)
 		return

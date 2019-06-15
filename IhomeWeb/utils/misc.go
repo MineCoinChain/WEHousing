@@ -7,6 +7,8 @@ import (
 	_ "github.com/astaxie/beego/cache/redis"
 	_ "github.com/garyburd/redigo/redis"
 	_ "github.com/gomodule/redigo/redis"
+	"crypto/md5"
+	"encoding/hex"
 )
 
 /* 将url加上 http://IP:PROT/  前缀 */
@@ -32,4 +34,9 @@ func RedisOpen(server_name, redis_addr, redis_port, redis_dbnum string) (bm cach
 		return nil,err
 	}
 	return bm, nil
+}
+//md5加密
+func Getmd5string(s string)string{
+	m :=md5.New()
+	return  hex.EncodeToString(m.Sum([]byte(s)))
 }
