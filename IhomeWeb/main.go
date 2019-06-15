@@ -31,7 +31,10 @@ func main() {
         rou.GET("/api/v1.0/session", handler.GetSession)
         //session
         rou.GET("/api/v1.0/house/index", handler.GetIndex)
-
+        //获取图片验证码
+        rou.GET("/api/v1.0/imagecode/:uuid",handler.GetImageCd)
+        //获取短信验证码
+        rou.GET("/api/v1.0/smscode/:mobile",handler.Getsmscd)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

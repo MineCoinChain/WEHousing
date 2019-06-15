@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package go.micro.srv.GetImageCd;
+
+service Example {
+    rpc GetImageCd (Request) returns (Response) {
+    }
+}
+
+message Request {
+    string uuid = 1;
+}
+
+
+message Response {
+    string errno = 1;
+    string errmsg = 2;
+    repeated uint32 pix = 3;
+	int64 stride = 4;
+    message point{
+        int64 x=1;
+        int64 y=2;
+    }
+    point min = 5;
+    point max = 6;
+}
+
+
