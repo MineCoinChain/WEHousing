@@ -53,6 +53,7 @@ func (e *Example) GetArea(ctx context.Context, req *example.Request, rsp *exampl
 	qs := o.QueryTable("area")
 	//查询全部
 	num, err := qs.All(&areas)
+	fmt.Println(num)
 	if err != nil {
 		fmt.Println("查询数据库错误")
 		rsp.Errno = utils.RECODE_DBERR

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package go.micro.srv.GetSession;
+
+service Example {
+	rpc GetSession(Request) returns (Response) {}
+}
+
+
+
+message Request {
+	string sessionid = 1;
+}
+
+message Response {
+	string errno = 1;
+	string errmsg = 2;
+	string data = 3;
+}
+
+
+

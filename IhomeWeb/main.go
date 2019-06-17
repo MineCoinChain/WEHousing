@@ -37,6 +37,10 @@ func main() {
         rou.GET("/api/v1.0/smscode/:mobile",handler.Getsmscd)
         //用户注册
         rou.POST("/api/v1.0/users",handler.PostRet)
+        //用户登陆
+        rou.POST("/api/v1.0/sessions",handler.PostLogin)
+        //退出登陆
+        rou.DELETE("/api/v1.0/session", handler.DeleteSession)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {
