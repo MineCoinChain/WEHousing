@@ -45,6 +45,8 @@ func main() {
         rou.GET("/api/v1.0/user",handler.GetUserInfo)
         //用户上传图片
         rou.POST("/api/v1.0/user/avatar",handler.PostAvatar)
+        //请求更新用户名
+        rou.PUT("/api/v1.0/user/name",handler.PutUserInfo)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

@@ -13,6 +13,7 @@ import (
 	DELETESESSION "sss/DeleteSession/proto/example"
 	GETUSERINFO "sss/GetUserInfo/proto/example"
 	POSTAVATAR "sss/PostAvatar/proto/example"
+	PUTUSERINFO "sss/PutUserInfo/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -533,15 +534,15 @@ func PostAvatar(w http.ResponseWriter, r *http.Request, params httprouter.Params
 	}
 
 	//返回数据
-	data:=make(map[string]interface{})
-	data["avatar_url"]=utils.AddDomain2Url(rsp.AvatarUrl)
+	data := make(map[string]interface{})
+	data["avatar_url"] = utils.AddDomain2Url(rsp.AvatarUrl)
 	//准备返回给前端的map
 	response := map[string]interface{}{
 		"errno":  rsp.Errno,
 		"errmsg": rsp.Errmsg,
-		"data":data,
+		"data":   data,
 	}
-	log.Println("data is ",data)
+	log.Println("data is ", data)
 	//设置返回数据的格式
 	w.Header().Set("Content-Type", "application/json")
 	//将map转化为json 返回给前端
@@ -549,4 +550,87 @@ func PostAvatar(w http.ResponseWriter, r *http.Request, params httprouter.Params
 		http.Error(w, err.Error(), 500)
 		return
 	}
+}
+
+func PutUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	fmt.Println("更新用户名   PutUserInfo   /api/v1.0/user/name")
+	//接受 前端发送过来数据的
+	var request map[string]interface{}
+	// 将前端 json 数据解析到 map当中
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	//数据校验
+	username:=request["name"].(string)
+	if username==""{
+		response := map[string]interface{}{
+			"errno": utils.RECODE_NODATA,
+			"errmsg": utils.RecodeText(utils.RECODE_NODATA),
+		}
+		// encode and write the response as json
+		//设置返回数据的格式
+		w.Header().Set("Content-Type","application/json")
+		//将map转化为json 返回给前端
+		if err := json.NewEncoder(w).Encode(response); err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		return
+	}
+	//获取sessionid
+	cookie, err := r.Cookie("ihomelogin")
+	if err != nil {
+		log.Println("获取cookie失败")
+		//准备返回给前端的map
+		response := map[string]interface{}{
+			"errno":  utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+		// encode and write the response as json
+		//设置返回数据的格式
+		w.Header().Set("Content-Type", "application/json")
+		//将map转化为json 返回给前端
+		if err := json.NewEncoder(w).Encode(response); err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+	}
+	//创建 grpc 客户端
+	cli := grpc.NewService()
+	//客户端初始化
+	cli.Init()
+
+	//通过protobuf 生成文件 创建 连接服务端 的客户端句柄
+	exampleClient := PUTUSERINFO.NewExampleService("go.micro.srv.PutUserInfo", cli.Client())
+	//通过句柄调用服务端函数
+	rsp, err := exampleClient.PutUserInfo(context.TODO(), &PUTUSERINFO.Request{
+		Sessionid: cookie.Value,
+		Username:  request["name"].(string),
+	})
+	//判断是否成功
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	//刷新cookie时间
+	cookienew := http.Cookie{Name: "ihomelogin", Value: cookie.Value, Path: "/", MaxAge: 600}
+	http.SetCookie(w, &cookienew)
+	//返回数据
+	data := make(map[string]interface{})
+	data["name"] = rsp.Username
+	//准备返回给前端的map
+	response := map[string]interface{}{
+		"errno":  utils.RECODE_MOBILEERR,
+		"errmsg": utils.RecodeText(utils.RECODE_MOBILEERR),
+		"data":   data,
+	}
+	//设置返回数据的格式
+	w.Header().Set("Content-Type", "application/json")
+	//将map转化为json 返回给前端
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
 }
