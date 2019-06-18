@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package go.micro.srv.PostAvatar;
+
+service Example {
+	rpc PostAvatar(Request) returns (Response) {}
+}
+
+message Request {
+	bytes avatar = 1;
+	string sessionid = 2;
+	int64 filesize = 3;
+	string filename = 4;
+}
+
+message Response {
+	string errno = 1;
+	string errmsg = 2;
+	string avatar_url = 3;
+}
+
