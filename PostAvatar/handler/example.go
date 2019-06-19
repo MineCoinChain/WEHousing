@@ -9,7 +9,6 @@ import (
 	"github.com/garyburd/redigo/redis"
 	"github.com/astaxie/beego/orm"
 	"sss/IhomeWeb/model"
-	"fmt"
 )
 
 type Example struct{}
