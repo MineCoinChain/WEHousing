@@ -53,6 +53,8 @@ func main() {
         rou.POST("/api/v1.0/user/auth",handler.PostUserAuth)
         //获取用户已发布房源信息服务
         rou.GET("/api/v1.0/user/houses",handler.GetUserHouses)
+        //发送（发布）房源信息服务
+        rou.POST("api/v1.0/houses",handler.PostHouses)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

@@ -826,3 +826,36 @@ func GetUserHouses(w http.ResponseWriter, r *http.Request, params httprouter.Par
 		return
 	}
 }
+
+func PostHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	// decode the incoming request as json
+	beego.Info("PostHouses 发布房源信息 /api/v1.0/houses ")
+	cli := grpc.NewService()
+	cli.Init()
+	// call the backend service
+	exampleClient := GETAREA.NewExampleService("go.micro.srv.GetArea", cli.Client())
+	rsp, err := exampleClient.GetArea(context.TODO(), &GETAREA.Request{})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	//接收数据
+	var areas []models.Area
+	for _, value := range rsp.Data {
+		temp := models.Area{Id: int(value.Aid), Name: value.Aname}
+		areas = append(areas, temp)
+	}
+	response := map[string]interface{}{
+		"errno":  rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":   areas,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	// encode and write the response as json
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
