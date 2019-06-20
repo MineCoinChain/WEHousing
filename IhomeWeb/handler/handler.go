@@ -4,27 +4,28 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	GETAREA "sss/GetArea/proto/example"
-	GETIMAGECD "sss/GetImageCd/proto/example"
-	GETSMSCD "sss/GetSmscd/proto/example"
-	POSTRET "sss/PostRet/proto/example"
-	GETSESSION "sss/GetSession/proto/example"
-	POSTLOGIN "sss/PostLogin/proto/example"
-	DELETESESSION "sss/DeleteSession/proto/example"
-	GETUSERINFO "sss/GetUserInfo/proto/example"
-	POSTAVATAR "sss/PostAvatar/proto/example"
-	PUTUSERINFO "sss/PutUserInfo/proto/example"
-	POSTUSERAUTH "sss/PostUserAuth/proto/example"
+	GETAREA "IHome/GetArea/proto/example"
+	GETIMAGECD "IHome/GetImageCd/proto/example"
+	GETSMSCD "IHome/GetSmscd/proto/example"
+	POSTRET "IHome/PostRet/proto/example"
+	GETSESSION "IHome/GetSession/proto/example"
+	POSTLOGIN "IHome/PostLogin/proto/example"
+	DELETESESSION "IHome/DeleteSession/proto/example"
+	GETUSERINFO "IHome/GetUserInfo/proto/example"
+	POSTAVATAR "IHome/PostAvatar/proto/example"
+	PUTUSERINFO "IHome/PutUserInfo/proto/example"
+	POSTUSERAUTH "IHome/PostUserAuth/proto/example"
+	GETUSERHOUSES "IHome/GetUserHouses/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
-	"sss/IhomeWeb/model"
+	"IHome/IhomeWeb/model"
 	"image"
 	"github.com/afocus/captcha"
 	"image/png"
 	"fmt"
 	"regexp"
-	"sss/IhomeWeb/utils"
+	"IHome/IhomeWeb/utils"
 	"log"
 )
 
@@ -63,7 +64,7 @@ func GetArea(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 
 func GetSession(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	beego.Info("获取Session url：api/v1.0/session")
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	if err != nil {
 		//准备返回给前端的map
 		response := map[string]interface{}{
@@ -262,9 +263,9 @@ func PostRet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 
 	//设置cookie
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	if err != nil || cookie.Value == "" {
-		cookie := http.Cookie{Name: "ihomelogin", Value: rsp.Sessionid, MaxAge: 600, Path: "/"}
+		cookie := http.Cookie{Name: "IHomelogin", Value: rsp.Sessionid, MaxAge: 600, Path: "/"}
 		http.SetCookie(w, &cookie)
 	}
 	//将数据返回前端
@@ -324,10 +325,10 @@ func PostLogin(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	log.Println(cookie)
 	if err != nil || cookie.Value == "" {
-		cookie := http.Cookie{Name: "ihomelogin", Value: rsp.Sessionid, MaxAge: 400, Path: "/"}
+		cookie := http.Cookie{Name: "IHomelogin", Value: rsp.Sessionid, MaxAge: 400, Path: "/"}
 		http.SetCookie(w, &cookie)
 	}
 	//准备返回给前端的map
@@ -353,7 +354,7 @@ func DeleteSession(w http.ResponseWriter, r *http.Request, params httprouter.Par
 	// call the backend service
 	exampleClient := DELETESESSION.NewExampleService("go.micro.srv.DeleteSession", cli.Client())
 	//获取session
-	userlogin, err := r.Cookie("ihomelogin")
+	userlogin, err := r.Cookie("IHomelogin")
 	if err != nil || userlogin.Value == "" {
 		log.Println("user not login")
 		response := map[string]interface{}{
@@ -377,9 +378,9 @@ func DeleteSession(w http.ResponseWriter, r *http.Request, params httprouter.Par
 	}
 	if rsp.Errno == "0" {
 		//将cookie中的sessionid设置为空
-		_, err = r.Cookie("ihomelogin")
+		_, err = r.Cookie("IHomelogin")
 		if err == nil {
-			cookie := http.Cookie{Name: "ihomelogin", Path: "/", MaxAge: -1}
+			cookie := http.Cookie{Name: "IHomelogin", Path: "/", MaxAge: -1}
 			http.SetCookie(w, &cookie)
 		}
 	}
@@ -399,7 +400,7 @@ func DeleteSession(w http.ResponseWriter, r *http.Request, params httprouter.Par
 
 func GetUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	fmt.Println("获取用户信息 GetUserInfo /api/v1.0/user")
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	if err != nil || cookie.Value == "" {
 		response := map[string]interface{}{
 			"errno":  utils.RECODE_SESSIONERR,
@@ -460,7 +461,7 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Param
 func PostAvatar(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	beego.Info("上传用户touxiang PostAvatar /api/v1.0/user/avatar")
 	//获取sessionid
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	if err != nil || cookie.Value == "" {
 		//准备返回给前端的map
 		response := map[string]interface{}{
@@ -580,7 +581,7 @@ func PutUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Param
 		return
 	}
 	//获取sessionid
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	if err != nil {
 		log.Println("获取cookie失败")
 		//准备返回给前端的map
@@ -615,7 +616,7 @@ func PutUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Param
 		return
 	}
 	//刷新cookie时间
-	cookienew := http.Cookie{Name: "ihomelogin", Value: cookie.Value, Path: "/", MaxAge: 600}
+	cookienew := http.Cookie{Name: "IHomelogin", Value: cookie.Value, Path: "/", MaxAge: 600}
 	http.SetCookie(w, &cookienew)
 	//返回数据
 	data := make(map[string]interface{})
@@ -638,7 +639,7 @@ func PutUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Param
 
 func GetUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	fmt.Println("获取用户信息 GetUserInfo /api/v1.0/user")
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	if err != nil || cookie.Value == "" {
 		response := map[string]interface{}{
 			"errno":  utils.RECODE_SESSIONERR,
@@ -721,7 +722,7 @@ func PostUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Para
 		}
 	}
 	//获取sessionid
-	cookie, err := r.Cookie("ihomelogin")
+	cookie, err := r.Cookie("IHomelogin")
 	if err != nil || cookie.Value == "" {
 		//准备返回给前端的map
 		response := map[string]interface{}{
@@ -756,7 +757,7 @@ func PostUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Para
 		return
 	}
 	//刷新cookie时间
-	cookienew := http.Cookie{Name: "ihomelogin", Value: cookie.Value, Path: "/", MaxAge: 600}
+	cookienew := http.Cookie{Name: "IHomelogin", Value: cookie.Value, Path: "/", MaxAge: 600}
 	http.SetCookie(w, &cookienew)
 	//准备返回给前端的map
 	response := map[string]interface{}{
@@ -766,6 +767,60 @@ func PostUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Para
 	//设置返回数据的格式
 	w.Header().Set("Content-Type", "application/json")
 	//将map转化为json 返回给前端
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+func GetUserHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	beego.Info("获取当前用户所发布的房源 GetUserHouses /api/v1.0/user/houses")
+	cli := grpc.NewService()
+	cli.Init()
+	// call the backend service
+	exampleClient := GETUSERHOUSES.NewExampleService("go.micro.srv.GetUserHouses", cli.Client())
+	userlogin, err := r.Cookie("IHomelogin")
+	if err != nil || userlogin.Value != "" {
+		//返回数据
+		response := map[string]interface{}{
+			"errno":  utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(response); err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		return
+	}
+	rsp, err := exampleClient.GetUserHouses(context.TODO(), &GETUSERHOUSES.Request{
+		Sessionid: userlogin.Value,
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	//房屋切片信息
+	house_list := []models.House{}
+	json.Unmarshal(rsp.Mix, &house_list)
+	//将房屋切片信息转换成map切片返回给前端
+	var houses []interface{}
+	for _, houseinfo := range house_list {
+		houses = append(houses, houseinfo.To_house_info())
+	}
+	data_map := make(map[string]interface{})
+	data_map["houses"] = houses
+	//返回数据
+	response := map[string]interface{}{
+		"errno":  rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":   data_map,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	// encode and write the response as json
 	if err := json.NewEncoder(w).Encode(response); err != nil {
 		http.Error(w, err.Error(), 500)
 		return

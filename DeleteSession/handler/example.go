@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 
-	example "sss/DeleteSession/proto/example"
-	"sss/IhomeWeb/utils"
+	example "IHome/DeleteSession/proto/example"
+	"IHome/IhomeWeb/utils"
 	"fmt"
 	"log"
 )

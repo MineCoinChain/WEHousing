@@ -2,11 +2,11 @@ package handler
 
 import (
 	"context"
-	example "sss/PutUserInfo/proto/example"
-	"sss/IhomeWeb/utils"
+	example "IHome/PutUserInfo/proto/example"
+	"IHome/IhomeWeb/utils"
 	"log"
 	"github.com/garyburd/redigo/redis"
-	"sss/IhomeWeb/model"
+	"IHome/IhomeWeb/model"
 	"github.com/astaxie/beego/orm"
 	"time"
 )

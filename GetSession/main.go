@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
-	"sss/GetSession/handler"
-	example "sss/GetSession/proto/example"
+	"IHome/GetSession/handler"
+	example "IHome/GetSession/proto/example"
 	"github.com/micro/go-grpc"
 )
 

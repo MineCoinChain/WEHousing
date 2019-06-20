@@ -2,13 +2,13 @@ package handler
 
 import (
 	"context"
-	example "sss/PostAvatar/proto/example"
-	"sss/IhomeWeb/utils"
+	example "IHome/PostAvatar/proto/example"
+	"IHome/IhomeWeb/utils"
 	"path"
 	"log"
 	"github.com/garyburd/redigo/redis"
 	"github.com/astaxie/beego/orm"
-	"sss/IhomeWeb/model"
+	"IHome/IhomeWeb/model"
 )
 
 type Example struct{}

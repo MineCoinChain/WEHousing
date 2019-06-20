@@ -6,7 +6,7 @@ import (
 	//go语言的sql的驱动
 	_ "github.com/go-sql-driver/mysql"
 	//已经创建好的工具包
-	"sss/IhomeWeb/utils"
+	"IHome/IhomeWeb/utils"
 	//time包关于时间信息
 	"time"
 	//beego

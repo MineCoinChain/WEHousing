@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
-	"sss/PostUserAuth/handler"
-	example "sss/PostUserAuth/proto/example"
+	"IHome/PostUserAuth/handler"
+	example "IHome/PostUserAuth/proto/example"
 	"github.com/micro/go-grpc"
 )
 

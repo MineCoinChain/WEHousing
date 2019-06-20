@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
-	"sss/PostRet/handler"
+	"IHome/PostRet/handler"
 
-	example "sss/PostRet/proto/example"
+	example "IHome/PostRet/proto/example"
 	"github.com/micro/go-grpc"
 )
 

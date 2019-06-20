@@ -2,8 +2,8 @@ package handler
 
 import (
 	"context"
-	example "sss/GetSession/proto/example"
-	"sss/IhomeWeb/utils"
+	example "IHome/GetSession/proto/example"
+	"IHome/IhomeWeb/utils"
 	"log"
 	"github.com/garyburd/redigo/redis"
 )

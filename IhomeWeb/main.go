@@ -4,10 +4,10 @@ import (
         "github.com/micro/go-log"
         "github.com/micro/go-web"
         "github.com/julienschmidt/httprouter"
-        _ "sss/IhomeWeb/model"
+        _ "IHome/IhomeWeb/model"
 
         "net/http"
-        "sss/IhomeWeb/handler"
+        "IHome/IhomeWeb/handler"
 )
 
 func main() {
@@ -51,6 +51,8 @@ func main() {
         rou.GET("/api/v1.0/user/auth", handler.GetUserAuth)
         //实名认证服务
         rou.POST("/api/v1.0/user/auth",handler.PostUserAuth)
+        //获取用户已发布房源信息服务
+        rou.GET("/api/v1.0/user/houses",handler.GetUserHouses)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

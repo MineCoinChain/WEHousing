@@ -3,10 +3,10 @@ package handler
 import (
 	"context"
 
-	example "sss/GetImageCd/proto/example"
+	example "IHome/GetImageCd/proto/example"
 	"github.com/afocus/captcha"
 	"image/color"
-	"sss/IhomeWeb/utils"
+	"IHome/IhomeWeb/utils"
 	"time"
 )
 

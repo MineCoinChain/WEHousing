@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
-	"sss/GetArea/handler"
+	"IHome/GetArea/handler"
 
-	example "sss/GetArea/proto/example"
+	example "IHome/GetArea/proto/example"
 	"github.com/micro/go-grpc"
 )
 

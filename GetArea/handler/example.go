@@ -2,11 +2,11 @@ package handler
 
 import (
 	"context"
-	example "sss/GetArea/proto/example"
+	example "IHome/GetArea/proto/example"
 	"fmt"
-	"sss/IhomeWeb/utils"
+	"IHome/IhomeWeb/utils"
 	"github.com/astaxie/beego/orm"
-	"sss/IhomeWeb/model"
+	"IHome/IhomeWeb/model"
 	"encoding/json"
 	"time"
 	"log"

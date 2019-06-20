@@ -3,12 +3,12 @@ package handler
 import (
 	"context"
 
-	example "sss/GetUserInfo/proto/example"
-	"sss/IhomeWeb/utils"
+	example "IHome/GetUserInfo/proto/example"
+	"IHome/IhomeWeb/utils"
 	"log"
 	"github.com/garyburd/redigo/redis"
 	"github.com/astaxie/beego/orm"
-	"sss/IhomeWeb/model"
+	"IHome/IhomeWeb/model"
 	"strconv"
 )
 

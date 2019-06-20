@@ -2,12 +2,12 @@ package handler
 
 import (
 	"context"
-	example "sss/GetSmscd/proto/example"
+	example "IHome/GetSmscd/proto/example"
 	"fmt"
-	"sss/IhomeWeb/utils"
+	"IHome/IhomeWeb/utils"
 	"github.com/astaxie/beego/orm"
 
-	"sss/IhomeWeb/model"
+	"IHome/IhomeWeb/model"
 	"github.com/garyburd/redigo/redis"
 	"log"
 	"math/rand"
