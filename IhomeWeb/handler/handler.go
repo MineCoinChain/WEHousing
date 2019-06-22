@@ -16,6 +16,7 @@ import (
 	PUTUSERINFO "IHome/PutUserInfo/proto/example"
 	POSTUSERAUTH "IHome/PostUserAuth/proto/example"
 	GETUSERHOUSES "IHome/GetUserHouses/proto/example"
+	POSTHOUSESIMAGE "IHome/PostHousesImage/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -850,6 +851,96 @@ func PostHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params
 		"errno":  rsp.Errno,
 		"errmsg": rsp.Errmsg,
 		"data":   areas,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	// encode and write the response as json
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	beego.Info("发送房屋图片PostHousesImage  /api/v1.0/houses/:id/images")
+	//获取houseid
+	houseid := params.ByName("id")
+	//获取sessionid
+	userlogin, err := r.Cookie("ihomelogin")
+	if err != nil {
+		resp := map[string]interface{}{
+			"errno":  utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
+		return
+	}
+	file, header, err := r.FormFile("house_image")
+	if err != nil {
+		beego.Info("Postupavatar   c.GetFile(avatar) err", err)
+
+		resp := map[string]interface{}{
+			"errno":  utils.RECODE_IOERR,
+			"errmsg": utils.RecodeText(utils.RECODE_IOERR),
+		}
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
+		return
+	}
+
+	filebuffer := make([]byte, header.Size)
+	_, err = file.Read(filebuffer)
+	if err != nil {
+		beego.Info("Postupavatar   file.Read(filebuffer) err", err)
+		resp := map[string]interface{}{
+			"errno":  utils.RECODE_IOERR,
+			"errmsg": utils.RecodeText(utils.RECODE_IOERR),
+		}
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
+		return
+	}
+
+	cli := grpc.NewService()
+	cli.Init()
+	// call the backend service
+	exampleClient := POSTHOUSESIMAGE.NewExampleService("go.micro.srv.PostHouseImage", cli.Client())
+	rsp, err := exampleClient.PostHousesImage(context.TODO(), &POSTHOUSESIMAGE.Request{
+		Sessionid: userlogin.Value,
+		Id:        houseid,
+		Image:     filebuffer,
+		Filesize:  header.Size,
+		Filename:  header.Filename,
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	//接收数据
+	data:=make(map[string]interface{})
+	data["url"]=utils.AddDomain2Url(rsp.Url)
+	response := map[string]interface{}{
+		"errno":  rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":   data,
 	}
 
 	w.Header().Set("Content-Type", "application/json")

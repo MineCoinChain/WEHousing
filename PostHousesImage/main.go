@@ -5,13 +5,13 @@ import (
 	"github.com/micro/go-micro"
 	"IHome/PostHousesImage/handler"
 	"IHome/PostHousesImage/subscriber"
-
 	example "IHome/PostHousesImage/proto/example"
+	"github.com/micro/go-grpc"
 )
 
 func main() {
 	// New Service
-	service := micro.NewService(
+	service := grpc.NewService(
 		micro.Name("go.micro.srv.PostHousesImage"),
 		micro.Version("latest"),
 	)
