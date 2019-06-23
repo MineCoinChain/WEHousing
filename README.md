@@ -63,7 +63,7 @@ __注:个人学习微服务使用__
 ## 项目启动
 
 - 项目启动：  
-    - **注意: 项目启动前请先查看项目[配置环境文件](./configurationFile/images/fehelper-github-com-yuanwenq-dailyfresh-blob-dev-dailyfresh-settings-py-1544797232546.png),配置你相应的设置,并安装好各个环境,mysql+redis+nginx+fastDFS+consul+Micro等**
+    - **注意: 项目启动前请先查看项目配置环境文件,配置你相应的设置,并安装好各个环境,mysql+redis+nginx+fastDFS+consul+Micro等**
 
 - consul启动：  
     ```    shell
