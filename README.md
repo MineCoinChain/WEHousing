@@ -1,4 +1,4 @@
-# Golang+Micro微服务实战-租房网项目
+# Go+Micro微服务实战-租房网项目
 
 功能:用户注册，用户登录，头像上传，用户详细信息获取，实名认证检测，房源发布，首页展示，搜索房源，订单管理，用户评价等模块。
 
@@ -48,15 +48,15 @@ __注:个人学习微服务使用__
 
 ## 运行环境配置及使用教程
 
-[docker安装教程](configurationFile/virtualenvDescript.md)
+[docker安装教程](./configurationFile/DockerInstall.md)
 
-[protobuf安装及使用教程](configurationFile/protobuf.md)
+[protobuf安装及使用教程](./configurationFile/protobuf.md)
 
 [micro介绍及安装教程](./configurationFile/micro.md)
 
-[FastDFS+nginx环境配置](./configurationFile/fastDFSDownload.md)
+[FastDFS+nginx环境配置](./configurationFile/nginxAndFastDFS-nginx-moduleDownload.md)
 
-[Consul安装及使用教程](./configurationFile/nginxAndFastDFS-nginx-moduleDownload.md)
+[Consul安装及使用教程](./configurationFile/Consul.md)
 
 [redis安装教程](./configurationFile/redisDownload.md)
 
