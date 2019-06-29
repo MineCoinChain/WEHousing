@@ -16,6 +16,7 @@ import (
 	PUTUSERINFO "IHome/PutUserInfo/proto/example"
 	POSTUSERAUTH "IHome/PostUserAuth/proto/example"
 	GETUSERHOUSES "IHome/GetUserHouses/proto/example"
+	POSTHOUSES "IHome/PostHouses/proto/example"
 	POSTHOUSESIMAGE "IHome/PostHousesImage/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
@@ -28,6 +29,7 @@ import (
 	"regexp"
 	"IHome/IhomeWeb/utils"
 	"log"
+	"io/ioutil"
 )
 
 func GetArea(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
@@ -831,26 +833,45 @@ func GetUserHouses(w http.ResponseWriter, r *http.Request, params httprouter.Par
 func PostHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	// decode the incoming request as json
 	beego.Info("PostHouses 发布房源信息 /api/v1.0/houses ")
+	//获取前端post发送的请求信息
+	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println("posthouses:",string(body))
+	//获取cookie
+	userlogin, err :=r.Cookie("ihomelogin")
+	if err!=nil{
+		resp := map[string]interface{}{
+			"errno": utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+		w.Header().Set("Content-Type", "application/json")
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
+		return
+	}
 	cli := grpc.NewService()
 	cli.Init()
 	// call the backend service
-	exampleClient := GETAREA.NewExampleService("go.micro.srv.GetArea", cli.Client())
-	rsp, err := exampleClient.GetArea(context.TODO(), &GETAREA.Request{})
+	exampleClient := POSTHOUSES.NewExampleService("go.micro.srv.PostHouses", cli.Client())
+	rsp, err := exampleClient.PostHouses(context.TODO(), &POSTHOUSES.Request{
+		Sessionid:userlogin.Value,
+		Max:body,
+	})
 	if err != nil {
 		http.Error(w, err.Error(), 500)
+		beego.Info(err)
 		return
 	}
+	/*得到插入房源信息表的 id*/
+	houseid_map:=make(map[string]interface{})
+	houseid_map["house_id"]=int(rsp.HouseId)
 
-	//接收数据
-	var areas []models.Area
-	for _, value := range rsp.Data {
-		temp := models.Area{Id: int(value.Aid), Name: value.Aname}
-		areas = append(areas, temp)
-	}
 	response := map[string]interface{}{
 		"errno":  rsp.Errno,
 		"errmsg": rsp.Errmsg,
-		"data":   areas,
+		"data":   houseid_map,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -865,6 +886,7 @@ func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 	beego.Info("发送房屋图片PostHousesImage  /api/v1.0/houses/:id/images")
 	//获取houseid
 	houseid := params.ByName("id")
+	fmt.Println("id")
 	//获取sessionid
 	userlogin, err := r.Cookie("ihomelogin")
 	if err != nil {
@@ -899,6 +921,9 @@ func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 		}
 		return
 	}
+	beego.Info(file, header)
+	beego.Info("文件大小", header.Size)
+	beego.Info("文件名", header.Filename)
 
 	filebuffer := make([]byte, header.Size)
 	_, err = file.Read(filebuffer)
@@ -921,7 +946,7 @@ func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 	cli := grpc.NewService()
 	cli.Init()
 	// call the backend service
-	exampleClient := POSTHOUSESIMAGE.NewExampleService("go.micro.srv.PostHouseImage", cli.Client())
+	exampleClient := POSTHOUSESIMAGE.NewExampleService("go.micro.srv.PostHousesImage", cli.Client())
 	rsp, err := exampleClient.PostHousesImage(context.TODO(), &POSTHOUSESIMAGE.Request{
 		Sessionid: userlogin.Value,
 		Id:        houseid,
@@ -935,8 +960,8 @@ func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 	}
 
 	//接收数据
-	data:=make(map[string]interface{})
-	data["url"]=utils.AddDomain2Url(rsp.Url)
+	data := make(map[string]interface{})
+	data["url"] = utils.AddDomain2Url(rsp.Url)
 	response := map[string]interface{}{
 		"errno":  rsp.Errno,
 		"errmsg": rsp.Errmsg,

@@ -10,6 +10,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"IHome/IhomeWeb/model"
 	"encoding/json"
+	"fmt"
 )
 
 type Example struct{}
@@ -28,6 +29,7 @@ func (e *Example) GetUserHouses(ctx context.Context, req *example.Request, rsp *
 	}
 	value := bm.Get(req.Sessionid + "user_id")
 	user_id, _ := redis.Int(value, nil)
+	fmt.Println("getuserhouses user id is",user_id)
 	o := orm.NewOrm()
 	var houses []models.House
 	num, err := o.QueryTable("house").Filter("user__id", user_id).All(&houses)

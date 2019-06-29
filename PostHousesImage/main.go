@@ -4,7 +4,6 @@ import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
 	"IHome/PostHousesImage/handler"
-	"IHome/PostHousesImage/subscriber"
 	example "IHome/PostHousesImage/proto/example"
 	"github.com/micro/go-grpc"
 )
@@ -22,11 +21,7 @@ func main() {
 	// Register Handler
 	example.RegisterExampleHandler(service.Server(), new(handler.Example))
 
-	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.srv.PostHousesImage", service.Server(), new(subscriber.Example))
 
-	// Register Function as Subscriber
-	micro.RegisterSubscriber("go.micro.srv.PostHousesImage", service.Server(), subscriber.Handler)
 
 	// Run service
 	if err := service.Run(); err != nil {
