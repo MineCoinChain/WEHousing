@@ -2,7 +2,7 @@
 
 功能:用户注册，用户登录，头像上传，用户详细信息获取，实名认证检测，房源发布，首页展示，搜索房源，订单管理，用户评价等。
 
-__注:个人学习微服务使用__
+__注:非商业项目，个人实习项目demo版__
 
 ## 技术栈
 + golang + docker + consul + grpc + protobuf + beego + mysql + redis + fastDFS + nginx 
