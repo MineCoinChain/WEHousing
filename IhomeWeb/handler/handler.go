@@ -20,6 +20,7 @@ import (
 	POSTHOUSESIMAGE "IHome/PostHousesImage/proto/example"
 	GETHOUSEINFO "IHome/GetHouseInfo/proto/example"
 	GETINDEX "IHome/GetIndex/proto/example"
+	GETHOUSES "IHome/GetHouses/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -1067,6 +1068,56 @@ func GetHouseInfo(w http.ResponseWriter, r *http.Request, params httprouter.Para
 		return
 	}
 	return
+}
+//获取（搜索）房源服务
+func GetHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params){
+	//创建grpc
+	server :=grpc.NewService()
+	//初始化
+	server.Init()
+
+	exampleClient := GETHOUSES.NewExampleService("go.micro.srv.GetHouses", server.Client())
+
+	//aid=5&sd=2017-11-12&ed=2017-11-30&sk=new&p=1
+	aid := r.URL.Query()["aid"][0] //aid=5   地区编号
+	sd := r.URL.Query()["sd"][0] //sd=2017-11-1   开始世界
+	ed := r.URL.Query()["ed"][0] //ed=2017-11-3   结束世界
+	sk := r.URL.Query()["sk"][0] //sk=new    第三栏条件
+	p := r.URL.Query()["p"][0] //tp=1   页数
+
+	rsp, err := exampleClient.GetHouses(context.TODO(), &GETHOUSES.Request{
+		Aid:aid,
+		Sd:sd,
+		Ed:ed,
+		Sk:sk,
+		P:p,
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+
+
+	houses_l := []interface{}{}
+	json.Unmarshal(rsp.Houses,&houses_l)
+
+	data := map[string]interface{}{}
+	data["current_page"] = rsp.CurrentPage
+	data["houses"] = houses_l
+	data["total_page"] = rsp.TotalPage
+
+	response := map[string]interface{}{
+		"errno": rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":data,
+	}
+	w.Header().Set("Content-Type", "application/json")
+
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 501)
+		return
+	}
 }
 
 

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package go.micro.srv.GetHouses;
+
+service Example {
+	rpc GetHouses(Request) returns (Response) {}
+}
+
+
+
+message Request {
+	string  Aid = 1;
+	string  Sd = 2;
+	string  Ed = 3;
+	string  Sk = 4;
+	string  P = 5;
+}
+
+message Response {
+	string Errno = 1;
+	string Errmsg = 2;
+	int64 Current_page = 3;
+	bytes Houses = 4;
+	int64 Total_page = 5;
+}
+

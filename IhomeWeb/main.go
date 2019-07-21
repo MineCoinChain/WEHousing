@@ -61,7 +61,8 @@ func main() {
         rou.GET("/api/v1.0/houses/:id",handler.GetHouseInfo)
         //获取首页轮播图的服务
         rou.GET("/api/v1.0/house/index",handler.GetIndex)
-
+        //搜索房源服务
+        rou.GET("/api/v1.0/houses",handler.GetHouses)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {
