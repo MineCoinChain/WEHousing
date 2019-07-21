@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package go.micro.srv.PostOrders;
+
+service Example {
+	rpc PostOrders(Request) returns (Response) {}
+}
+
+
+message Request {
+	string Sessionid = 1;
+	bytes Body = 2 ;
+}
+
+message Response {
+	string Errno = 2;
+	string Errmsg = 3;
+	int64  Order_id = 1;
+}
+

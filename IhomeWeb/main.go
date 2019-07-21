@@ -63,6 +63,8 @@ func main() {
         rou.GET("/api/v1.0/house/index",handler.GetIndex)
         //搜索房源服务
         rou.GET("/api/v1.0/houses",handler.GetHouses)
+        //发布订单服务
+        rou.GET("/api/v1.0/orders",handler.PostOrders)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

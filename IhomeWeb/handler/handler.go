@@ -1119,5 +1119,64 @@ func GetHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params)
 		return
 	}
 }
+//发布订单服务
+func PostOrders(w http.ResponseWriter, r *http.Request, params httprouter.Params){
+	beego.Info("PostOrders  发布订单 /api/v1.0/orders")
 
+	//将post代过来的数据转化以下
+	body, _ := ioutil.ReadAll(r.Body)
+
+	userlogin,err:=r.Cookie("userlogin")
+	if err != nil||userlogin.Value==""{
+		resp := map[string]interface{}{
+			"errno": utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
+		return
+	}
+
+
+	service := grpc.NewService()
+	service.Init()
+
+	//调用服务
+	exampleClient := POSTORDERS.NewExampleService("go.micro.srv.PostOrders", service.Client())
+	rsp, err := exampleClient.PostOrders(context.TODO(), &POSTORDERS.Request{
+		//sessionid
+		Sessionid:userlogin.Value,
+		//前端发送过来的数据
+		Body:body,
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	/*得到插入房源信息表的 id*/
+	houseid_map :=make(map[string]interface{})
+	houseid_map["order_id"] = int(rsp.OrderId)
+
+
+	// we want to augment the response
+	response := map[string]interface{}{
+		"errno": rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":houseid_map,
+	}
+	w.Header().Set("Content-Type", "application/json")
+
+	// encode and write the response as json
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 501)
+		return
+	}
+}
 
