@@ -18,6 +18,7 @@ import (
 	GETUSERHOUSES "IHome/GetUserHouses/proto/example"
 	POSTHOUSES "IHome/PostHouses/proto/example"
 	POSTHOUSESIMAGE "IHome/PostHousesImage/proto/example"
+	GETHOUSEINFO "IHome/GetHouseInfo/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -30,8 +31,6 @@ import (
 	"IHome/IhomeWeb/utils"
 	"log"
 	"io/ioutil"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/example"
-	"time"
 )
 
 func GetArea(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
@@ -982,31 +981,71 @@ func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 func GetHouseInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	beego.Info("获取房源详细信息 GetHouseInfo  api/v1.0/houses/:id ")
 
-	var request map[string]interface{}
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		http.Error(w, err.Error(), 500)
+	//创建服务
+	server :=grpc.NewService()
+	server.Init()
+
+	// call the backend service
+	exampleClient := GETHOUSEINFO.NewExampleService("go.micro.srv.GetHouseInfo", server.Client())
+	//获取房屋id
+	id :=params.ByName("id")
+
+	//获取sessionid
+	userlogin,err:=r.Cookie("userlogin")
+	if err != nil{
+		resp := map[string]interface{}{
+			"errno": utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
 		return
 	}
 
-	// call the backend service
-	exampleClient := example.NewExampleService("go.micro.srv.template", client.DefaultClient)
-	rsp, err := exampleClient.Call(context.TODO(), &example.Request{
-		Name: request["name"].(string),
+
+
+	rsp, err := exampleClient.GetHouseInfo(context.TODO(), &GETHOUSEINFO.Request{
+		//Sessionid
+		Sessionid:userlogin.Value,
+		//房屋id
+		Id:id,
 	})
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
 
+
+	//house := models.House{}
+	house := make(map[string]interface{})
+
+	json.Unmarshal(rsp.Housedata,&house)
+
+	data_map :=make(map[string]interface{})
+	//用户id
+	data_map["user_id"] = int(rsp.Userid)
+	//房屋详细信息
+	data_map["house"] =  house
+
+
 	// we want to augment the response
 	response := map[string]interface{}{
-		"msg": rsp.Msg,
-		"ref": time.Now().UnixNano(),
+		"errno": rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":data_map,
 	}
+	w.Header().Set("Content-Type", "application/json")
 
 	// encode and write the response as json
 	if err := json.NewEncoder(w).Encode(response); err != nil {
 		http.Error(w, err.Error(), 501)
 		return
 	}
+	return
 }
