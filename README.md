@@ -140,6 +140,24 @@ __注:个人娱乐项目__
 │   ├── 发送用户实名认证信息服务
 ├── PutUserInfo
 │   ├── 发送用户信息
+├── GetUserAuth
+│   ├── 获取（检查）用户实名信息服务
+├── PostHousesImage
+│   ├── 发送（上传）房屋图片服务
+├── GetHouseInfo
+│   ├── 获取房屋详细信息服务
+├── GetIndex
+│   ├── 获取首页轮播图片服务
+├── GetHouses
+│   ├── 获取（搜索）房源服务
+├── PostOrders
+│   ├── 发送（发布）订单服务
+├── GetUserOrder
+│   ├── 获取房东/租户订单信息服务
+├── PutOrders
+│   ├── 更新房东同意/拒绝订单
+├── PutComments
+│   ├── 更新用户评价订单信息
 └── README.md
 
 ```
