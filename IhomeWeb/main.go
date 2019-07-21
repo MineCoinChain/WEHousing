@@ -57,6 +57,9 @@ func main() {
         rou.POST("/api/v1.0/houses",handler.PostHouses)
         //发送（上传）房屋图片服务
         rou.POST("/api/v1.0/houses/:id/images",handler.PostHouseImage)
+        //获取房屋详细信息的服务
+        rou.GET("/api/v1.0/houses/:id",handler.GetHouseInfo)
+
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

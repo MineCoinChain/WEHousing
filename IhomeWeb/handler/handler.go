@@ -30,6 +30,8 @@ import (
 	"IHome/IhomeWeb/utils"
 	"log"
 	"io/ioutil"
+	"github.com/hyperledger/fabric/core/ledger/kvledger/example"
+	"time"
 )
 
 func GetArea(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
@@ -972,6 +974,39 @@ func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 	// encode and write the response as json
 	if err := json.NewEncoder(w).Encode(response); err != nil {
 		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+//获取房屋详细信息的服务
+func GetHouseInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	beego.Info("获取房源详细信息 GetHouseInfo  api/v1.0/houses/:id ")
+
+	var request map[string]interface{}
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	// call the backend service
+	exampleClient := example.NewExampleService("go.micro.srv.template", client.DefaultClient)
+	rsp, err := exampleClient.Call(context.TODO(), &example.Request{
+		Name: request["name"].(string),
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	// we want to augment the response
+	response := map[string]interface{}{
+		"msg": rsp.Msg,
+		"ref": time.Now().UnixNano(),
+	}
+
+	// encode and write the response as json
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 501)
 		return
 	}
 }
