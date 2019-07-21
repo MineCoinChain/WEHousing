@@ -21,6 +21,7 @@ import (
 	GETHOUSEINFO "IHome/GetHouseInfo/proto/example"
 	GETINDEX "IHome/GetIndex/proto/example"
 	GETHOUSES "IHome/GetHouses/proto/example"
+	GETUSERORDER "IHome/GetUserOrder/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -1179,4 +1180,69 @@ func PostOrders(w http.ResponseWriter, r *http.Request, params httprouter.Params
 		return
 	}
 }
+//获取房东/租户订单信息服务
+func GetUserOrder(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
+
+	beego.Info("/api/v1.0/user/orders   GetUserOrder 获取订单 ")
+	server :=grpc.NewService()
+	server.Init()
+	// call the backend service
+	exampleClient := GETUSERORDER.NewExampleService("go.micro.srv.GetUserOrder", server.Client())
+
+	//获取cookie
+	userlogin,err:=r.Cookie("userlogin")
+	if err != nil{
+		resp := map[string]interface{}{
+			"errno": utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
+		return
+	}
+	//获取role
+	role := r.URL.Query()["role"][0] //role
+
+
+	rsp, err := exampleClient.GetUserOrder(context.TODO(), &GETUSERORDER.Request{
+		//sessionid
+		Sessionid:userlogin.Value,
+		//角色
+		Role:role,
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	order_list := []interface{}{}
+	json.Unmarshal(rsp.Orders,&order_list)
+
+	data := map[string]interface{}{}
+	data["orders"] = order_list
+
+
+
+	// we want to augment the response
+	response := map[string]interface{}{
+		"errno": rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":data,
+	}
+
+
+	w.Header().Set("Content-Type", "application/json")
+
+	// encode and write the response as json
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 501)
+		return
+	}
+}

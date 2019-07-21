@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package go.micro.srv.GetUserOrder;
+
+service Example {
+	rpc GetUserOrder(Request) returns (Response) {}
+}
+
+
+message Request {
+	//	角色
+	string role = 1;
+	//sessionid
+	string Sessionid = 2;
+}
+
+message Response {
+	//	错误码
+	string Errno=1 ;
+	//错误信息
+	string Errmsg=2 ;
+	//订单的二进制数据流
+	bytes Orders = 3;
+}
+
+
