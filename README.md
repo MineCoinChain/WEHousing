@@ -93,6 +93,19 @@ __注:个人娱乐项目__
     重启nginx
     sudo /usr/local/nginx/sbin/nginx -s reload
     ```
+    
+- 创建服务的指令
+    ```shell
+    新创建微服务的指令为,ProjectPath为项目所在路径，ServerName是服务名字
+    micro new --type srv ProjectPath/ServerName
+    ```
+    
+- 初始化protobuf文件的命令
+    ```shell
+    可以直接执行generateproto.sh文件，也可以cd到该项目的项目目录下然后执行如下命令：
+    protoc --proto_path=. --go_out=. --micro_out=. proto/example/example.proto
+    ```
+    
 ## 项目布局
 ```
 ├── DeleteSession
