@@ -64,7 +64,7 @@ func main() {
         //搜索房源服务
         rou.GET("/api/v1.0/houses",handler.GetHouses)
         //发布订单服务
-        rou.GET("/api/v1.0/orders",handler.PostOrders)
+        rou.POST("/api/v1.0/orders",handler.PostOrders)
         //获取房东/租户订单信息服务
         rou.GET("/api/v1.0/user/orders",handler.GetUserOrder)
 		service.Handle("/",rou)
