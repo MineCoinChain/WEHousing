@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package go.micro.srv.PutComment;
+
+service Example {
+	rpc PutComment(Request) returns (Response) {}
+}
+
+
+
+message Request {
+	string Order_id = 1;
+	string Comment = 2;
+	string Sessionid = 3;
+}
+
+message Response {
+	string Errno = 1;
+	string Errmsg = 2;
+}
+
+
