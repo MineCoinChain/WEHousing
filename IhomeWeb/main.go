@@ -59,6 +59,8 @@ func main() {
         rou.POST("/api/v1.0/houses/:id/images",handler.PostHouseImage)
         //获取房屋详细信息的服务
         rou.GET("/api/v1.0/houses/:id",handler.GetHouseInfo)
+        //获取首页轮播图的服务
+        rou.GET("/api/v1.0/house/index",handler.GetIndex)
 
 		service.Handle("/",rou)
 		// 服务运行

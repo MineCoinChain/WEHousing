@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package go.micro.srv.GetIndex;
+
+service Example {
+	rpc GetIndex(Request) returns (Response) {}
+}
+
+message Request {
+}
+
+message Response {
+	string errno = 1;
+	string errmsg = 2;
+	bytes Max = 3;
+}

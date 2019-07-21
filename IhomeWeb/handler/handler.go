@@ -19,6 +19,7 @@ import (
 	POSTHOUSES "IHome/PostHouses/proto/example"
 	POSTHOUSESIMAGE "IHome/PostHousesImage/proto/example"
 	GETHOUSEINFO "IHome/GetHouseInfo/proto/example"
+	GETINDEX "IHome/GetIndex/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -112,18 +113,36 @@ func GetSession(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 
 }
-
+//获取首页轮播图的服务
 func GetIndex(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	//准备返回给前端的map
-	response := map[string]interface{}{
-		"errno":  "0",
-		"errmsg": "ok",
+	beego.Info("获取首页轮播 url：api/v1.0/houses/index")
+	server :=grpc.NewService()
+	server.Init()
+
+	exampleClient := GETINDEX.NewExampleService("go.micro.srv.GetIndex", server.Client())
+
+
+	rsp, err := exampleClient.GetIndex(context.TODO(),&GETINDEX.Request{})
+	if err != nil {
+		beego.Info(err)
+		http.Error(w, err.Error(), 502)
+		return
 	}
-	//设置返回数据的格式
+	data := []interface{}{}
+	json.Unmarshal(rsp.Max,&data)
+
+	//创建返回数据map
+	response := map[string]interface{}{
+		"errno": rsp.Errno,
+		"errmsg": rsp.Errmsg,
+		"data":data,
+
+	}
 	w.Header().Set("Content-Type", "application/json")
-	//将map转化为json 返回给前端
+
+	// 将返回数据map发送给前端
 	if err := json.NewEncoder(w).Encode(response); err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, err.Error(), 503)
 		return
 	}
 }
@@ -1049,3 +1068,5 @@ func GetHouseInfo(w http.ResponseWriter, r *http.Request, params httprouter.Para
 	}
 	return
 }
+
+
