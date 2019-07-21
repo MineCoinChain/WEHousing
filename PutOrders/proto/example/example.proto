@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package go.micro.srv.PutOrders;
+
+service Example {
+	rpc PutOrders(Request) returns (Response) {}
+}
+
+
+message Request {
+	string Sessionid = 1;
+	string Orderid = 2;
+	string Action = 3;
+}
+
+message Response {
+	string Errno = 1;
+	string Errmsg = 2;
+}
+

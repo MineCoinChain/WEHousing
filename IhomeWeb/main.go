@@ -67,6 +67,8 @@ func main() {
         rou.POST("/api/v1.0/orders",handler.PostOrders)
         //获取房东/租户订单信息服务
         rou.GET("/api/v1.0/user/orders",handler.GetUserOrder)
+        //更新房东同意/拒绝订单
+        rou.PUT("/api/v1.0/orders/:id/status",handler.PutOrders)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {

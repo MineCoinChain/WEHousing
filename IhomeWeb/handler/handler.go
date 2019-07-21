@@ -22,6 +22,8 @@ import (
 	GETINDEX "IHome/GetIndex/proto/example"
 	GETHOUSES "IHome/GetHouses/proto/example"
 	GETUSERORDER "IHome/GetUserOrder/proto/example"
+	PUTORDERS "IHome/PutOrders/proto/example"
+	POSTORDERS "IHome/PostOrders/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -1181,7 +1183,7 @@ func PostOrders(w http.ResponseWriter, r *http.Request, params httprouter.Params
 	}
 }
 //获取房东/租户订单信息服务
-func GetUserOrder(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func GetUserOrder(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 
 
 	beego.Info("/api/v1.0/user/orders   GetUserOrder 获取订单 ")
@@ -1246,3 +1248,64 @@ func GetUserOrder(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 }
+//更新房东同意/拒绝订单
+func PutOrders(w http.ResponseWriter, r *http.Request, params httprouter.Params){
+	// decode the incoming request as json
+	//接收请求携带的数据    处理json
+	var request map[string]interface{}
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		http.Error(w, err.Error(), 501)
+		return
+	}
+	//获取cookie   拿到cookie当中的数据
+	userlogin,err:=r.Cookie("userlogin")
+	if err != nil{
+		resp := map[string]interface{}{
+			"errno": utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		// encode and write the response as json
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 502)
+			beego.Info(err)
+			return
+		}
+		return
+	}
+	//创建grpc
+	server:=grpc.NewService()
+	//初始化
+	server.Init()
+
+	// call the backend service
+	exampleClient := PUTORDERS.NewExampleService("go.micro.srv.PutOrders", server.Client())
+
+	rsp, err := exampleClient.PutOrders(context.TODO(), &PUTORDERS.Request{
+		//sessionid
+		Sessionid:userlogin.Value,
+		//具体操作
+		Action:request["action"].(string),
+		//订单id
+		Orderid:params.ByName("id"),
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 503)
+		return
+	}
+
+	// we want to augment the response
+	response := map[string]interface{}{
+		"errno": rsp.Errno,
+		"errmsg": rsp.Errmsg,
+	}
+	w.Header().Set("Content-Type", "application/json")
+
+	// encode and write the response as json
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 504)
+		return
+	}
+}
+
