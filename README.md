@@ -2,7 +2,7 @@
 
 功能:用户注册，用户登录，头像上传，用户详细信息获取，实名认证检测，房源发布，首页展示，搜索房源，订单管理，用户评价等。
 
-__注:个人娱乐项目__
+__注:可作为入门micro入门教程使用__
 
 ## 技术栈
 + golang + docker + consul + grpc + protobuf + beego + mysql + redis + fastDFS + nginx 
