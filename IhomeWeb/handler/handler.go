@@ -24,6 +24,7 @@ import (
 	GETUSERORDER "IHome/GetUserOrder/proto/example"
 	PUTORDERS "IHome/PutOrders/proto/example"
 	POSTORDERS "IHome/PostOrders/proto/example"
+	PUTCOMMENT "IHome/PutComment/proto/example"
 	"github.com/julienschmidt/httprouter"
 	"github.com/micro/go-grpc"
 	"github.com/astaxie/beego"
@@ -37,7 +38,7 @@ import (
 	"log"
 	"io/ioutil"
 )
-
+//获取地区信息服务
 func GetArea(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	// decode the incoming request as json
 	beego.Info("获取地区请求客户端 url：api/v1.0/areas")
@@ -70,7 +71,7 @@ func GetArea(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 		return
 	}
 }
-
+//获取session信息服务
 func GetSession(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	beego.Info("获取Session url：api/v1.0/session")
 	cookie, err := r.Cookie("IHomelogin")
@@ -150,7 +151,7 @@ func GetIndex(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 }
-
+//获取验证码图片服务
 func GetImageCd(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	beego.Info("获取图片验证码 url：/api/v1.0/imagecode/:uuid")
 	uuid := ps.ByName("uuid")
@@ -193,7 +194,7 @@ func GetImageCd(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	fmt.Println(image)
 	png.Encode(w, image)
 }
-
+//获取短信验证码服务
 func Getsmscd(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	beego.Info("获取短信验证码 /api/v1.0/smscode/:mobile")
@@ -245,7 +246,7 @@ func Getsmscd(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 }
-
+//发送注册信息服务
 func PostRet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	fmt.Println(" 注册服务  PostRet  /api/v1.0/users")
 	//接受 前端发送过来数据的
@@ -306,7 +307,7 @@ func PostRet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 }
-
+//发送登陆信息服务
 func PostLogin(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	fmt.Println("登陆 api/v1.0/sessions")
 	//接受 前端发送过来数据的
@@ -371,7 +372,7 @@ func PostLogin(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 }
-
+//删除（退出）登陆信息服务
 func DeleteSession(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	// decode the incoming request as json
 	beego.Info("退出登陆 url：/api/v1.0/session Deletesession()")
@@ -424,7 +425,7 @@ func DeleteSession(w http.ResponseWriter, r *http.Request, params httprouter.Par
 		return
 	}
 }
-
+//获取用户基本信息服务
 func GetUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	fmt.Println("获取用户信息 GetUserInfo /api/v1.0/user")
 	cookie, err := r.Cookie("IHomelogin")
@@ -484,7 +485,7 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Param
 		return
 	}
 }
-
+//发送（上传）用户头像服务
 func PostAvatar(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	beego.Info("上传用户touxiang PostAvatar /api/v1.0/user/avatar")
 	//获取sessionid
@@ -580,7 +581,7 @@ func PostAvatar(w http.ResponseWriter, r *http.Request, params httprouter.Params
 		return
 	}
 }
-
+//更新用户名服务
 func PutUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	fmt.Println("更新用户名   PutUserInfo   /api/v1.0/user/name")
 	//接受 前端发送过来数据的
@@ -663,7 +664,7 @@ func PutUserInfo(w http.ResponseWriter, r *http.Request, params httprouter.Param
 	}
 
 }
-
+//获取（检查）用户实名信息服务
 func GetUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	fmt.Println("获取用户信息 GetUserInfo /api/v1.0/user")
 	cookie, err := r.Cookie("IHomelogin")
@@ -723,7 +724,7 @@ func GetUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Param
 		return
 	}
 }
-
+//发送用户实名认证信息服务
 func PostUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	fmt.Println("更新实名认证检测  URL: /api/v1.0/user/auth PostUserAuth ")
 	//接受 前端发送过来数据的
@@ -799,7 +800,7 @@ func PostUserAuth(w http.ResponseWriter, r *http.Request, params httprouter.Para
 		return
 	}
 }
-
+//获取用户已发布房源信息服务
 func GetUserHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	beego.Info("获取当前用户所发布的房源 GetUserHouses /api/v1.0/user/houses")
 	cli := grpc.NewService()
@@ -853,7 +854,7 @@ func GetUserHouses(w http.ResponseWriter, r *http.Request, params httprouter.Par
 		return
 	}
 }
-
+//发送（发布）房源信息服务
 func PostHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	// decode the incoming request as json
 	beego.Info("PostHouses 发布房源信息 /api/v1.0/houses ")
@@ -905,7 +906,7 @@ func PostHouses(w http.ResponseWriter, r *http.Request, params httprouter.Params
 		return
 	}
 }
-
+//发送（上传）房屋图片服务
 func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	beego.Info("发送房屋图片PostHousesImage  /api/v1.0/houses/:id/images")
 	//获取houseid
@@ -999,7 +1000,6 @@ func PostHouseImage(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 		return
 	}
 }
-
 //获取房屋详细信息的服务
 func GetHouseInfo(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	beego.Info("获取房源详细信息 GetHouseInfo  api/v1.0/houses/:id ")
@@ -1308,4 +1308,58 @@ func PutOrders(w http.ResponseWriter, r *http.Request, params httprouter.Params)
 		return
 	}
 }
+//更新用户评价订单信息
+func PutComment(w http.ResponseWriter, r *http.Request, params httprouter.Params){
+	beego.Info("PutComment  用户评价 /api/v1.0/orders/:id/comment")
+	var request map[string]interface{}
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 
+	service := grpc.NewService()
+	service.Init()
+	exampleClient := PUTCOMMENT.NewExampleService("go.micro.srv.PutComment", service.Client())
+
+	//获取cookie
+	userlogin,err:=r.Cookie("userlogin")
+	if err != nil{
+		resp := map[string]interface{}{
+			"errno": utils.RECODE_SESSIONERR,
+			"errmsg": utils.RecodeText(utils.RECODE_SESSIONERR),
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			http.Error(w, err.Error(), 503)
+			beego.Info(err)
+			return
+		}
+		return
+	}
+
+	rsp, err := exampleClient.PutComment(context.TODO(), &PUTCOMMENT.Request{
+		//sessionid
+		Sessionid:userlogin.Value,
+		//评价
+		Comment:request["comment"].(string),
+		//订单id
+		OrderId:params.ByName("id"),
+	})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	response := map[string]interface{}{
+		"errno": rsp.Errno,
+		"errmsg": rsp.Errmsg,
+	}
+	w.Header().Set("Content-Type", "application/json")
+
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), 501)
+		return
+	}
+}

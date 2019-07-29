@@ -69,6 +69,8 @@ func main() {
         rou.GET("/api/v1.0/user/orders",handler.GetUserOrder)
         //更新房东同意/拒绝订单
         rou.PUT("/api/v1.0/orders/:id/status",handler.PutOrders)
+        //更新用户评价订单信息
+        rou.PUT("/api/v1.0/orders/:id/comment",handler.PutComment)
 		service.Handle("/",rou)
 		// 服务运行
         if err := service.Run(); err != nil {
