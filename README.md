@@ -222,6 +222,6 @@ __注:微服务入门教程__
 
 ##### [22 更新实名认证信息](./Document/material/22更新实名认证信息.md)
 
-##### [23 业务梳理](./Document/material/23业务梳理.md)
+##### [23 其他模块](./Document/material/23业务梳理.md)
 
 ##### [24 使用docker-compose进行单机集群启动](./Document/material/24使用docker-compose进行单机集群启动.md)
