@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fd1d6e8c-6942-4502-b50b-d4b65e9a7b23" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/IhomeWeb/handler/handler.go" afterPath="$PROJECT_DIR$/IhomeWeb/handler/handler.go" />
-      <change beforePath="$PROJECT_DIR$/IhomeWeb/main.go" afterPath="$PROJECT_DIR$/IhomeWeb/main.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,16 +16,16 @@
       <file leaf-file-name="handler.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IhomeWeb/handler/handler.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="24" column="45" lean-forward="true" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
+            <state relative-caret-position="270">
+              <caret line="373" column="1" lean-forward="false" selection-start-line="373" selection-start-column="1" selection-end-line="373" selection-end-column="1" />
               <folding>
+                <element signature="e#17#1255#0" expanded="true" />
                 <element signature="n#!!block;n#GetArea#0" expanded="false" />
                 <element signature="n#!!block;n#GetSession#0" expanded="false" />
                 <element signature="n#!!block;n#GetIndex#0" expanded="false" />
                 <element signature="n#!!block;n#GetImageCd#0" expanded="false" />
                 <element signature="n#!!block;n#Getsmscd#0" expanded="false" />
                 <element signature="n#!!block;n#PostRet#0" expanded="false" />
-                <element signature="n#!!block;n#PostLogin#0" expanded="false" />
                 <element signature="n#!!block;n#DeleteSession#0" expanded="false" />
                 <element signature="n#!!block;n#GetUserInfo#0" expanded="false" />
                 <element signature="n#!!block;n#PostAvatar#0" expanded="false" />
@@ -44,6 +42,26 @@
                 <element signature="n#!!block;n#PutOrders#0" expanded="false" />
                 <element signature="n#!!block;n#PutComment#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="example.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PostLogin/handler/example.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="misc.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IhomeWeb/utils/misc.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="40" column="5" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -160,6 +178,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -179,16 +198,26 @@
               <item name="IhomeWeb" type="462c0819:PsiDirectoryNode" />
               <item name="handler" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="IHome" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IHome" type="462c0819:PsiDirectoryNode" />
+              <item name="PostLogin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IHome" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IHome" type="462c0819:PsiDirectoryNode" />
+              <item name="PostLogin" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/trace0" />
     <property name="go.sdk.automatically.set" value="true" />
   </component>
   <component name="RunDashboard">
@@ -207,10 +236,9 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="11" width="1849" height="828" extended-state="6" />
-    <editor active="true" />
+    <frame x="2" y="11" width="1549" height="828" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17819591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18248175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -261,16 +289,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/PutComment/handler/example.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1818">
-          <caret line="101" column="16" lean-forward="true" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
-          <folding>
-            <element signature="e#17#217#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PutComment/proto/example/example.proto">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -304,13 +322,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#17#1255#0" expanded="true" />
             <element signature="n#!!block;n#GetArea#0" expanded="false" />
             <element signature="n#!!block;n#GetSession#0" expanded="false" />
             <element signature="n#!!block;n#GetIndex#0" expanded="false" />
             <element signature="n#!!block;n#GetImageCd#0" expanded="false" />
             <element signature="n#!!block;n#Getsmscd#0" expanded="false" />
             <element signature="n#!!block;n#PostRet#0" expanded="false" />
-            <element signature="n#!!block;n#PostLogin#0" expanded="false" />
             <element signature="n#!!block;n#DeleteSession#0" expanded="false" />
             <element signature="n#!!block;n#GetUserInfo#0" expanded="false" />
             <element signature="n#!!block;n#PostAvatar#0" expanded="false" />
@@ -515,13 +533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PostLogin/handler/example.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PostHousesImage/handler/example.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="882">
@@ -658,18 +669,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/IhomeWeb/utils/misc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="40" column="5" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PostLogin/handler/example.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/IhomeWeb/handler/handler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="24" column="45" lean-forward="true" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
+        <state relative-caret-position="270">
+          <caret line="373" column="1" lean-forward="false" selection-start-line="373" selection-start-column="1" selection-end-line="373" selection-end-column="1" />
           <folding>
+            <element signature="e#17#1255#0" expanded="true" />
             <element signature="n#!!block;n#GetArea#0" expanded="false" />
             <element signature="n#!!block;n#GetSession#0" expanded="false" />
             <element signature="n#!!block;n#GetIndex#0" expanded="false" />
             <element signature="n#!!block;n#GetImageCd#0" expanded="false" />
             <element signature="n#!!block;n#Getsmscd#0" expanded="false" />
             <element signature="n#!!block;n#PostRet#0" expanded="false" />
-            <element signature="n#!!block;n#PostLogin#0" expanded="false" />
             <element signature="n#!!block;n#DeleteSession#0" expanded="false" />
             <element signature="n#!!block;n#GetUserInfo#0" expanded="false" />
             <element signature="n#!!block;n#PostAvatar#0" expanded="false" />
