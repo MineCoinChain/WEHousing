@@ -2,7 +2,9 @@
 
 项目的基本功能:用户注册，用户登录，头像上传，用户详细信息获取，实名认证检测，房源发布，首页展示，搜索房源，订单管理，用户评价等服务。同时我们通过fabric溯源技术对房产信息进行认证，告别二手房东的烦恼！
   
-    
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
    
 __PS:__  
      __1.可作为微服务和联盟链fabric的入门教程，一个项目玩转目前golang最火的两个领域：微服务和区块链。__  
@@ -11,7 +13,9 @@ __PS:__
      __4.fabric环境搭建比较复杂，请克制砸电脑的冲动。__  
      __5.我的仓库里有一个HouseTracing的项目，没事也可以看看，这是一个基于fabric的房产溯源认证平台。__  
     
-    
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
       
 
 ## 技术栈
@@ -49,6 +53,10 @@ __PS:__
         - [x] 发布订单
         - [x] 查看订单信息
         - [x] 订单评论
+    
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
 
 ## 项目文档
 
@@ -72,6 +80,9 @@ __PS:__
 
 [redis安装教程](./configurationFile/redisDownload.md)
 
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
 ## 项目启动
 
 - 项目启动：  
@@ -185,6 +196,9 @@ __PS:__
 
 ```
 
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
 ## Docker学习教程
 ##### [Docker学习教程](./Document/Docker/docker.md)
 
@@ -238,6 +252,9 @@ __PS:__
 
 ##### [24 使用docker-compose进行单机集群启动](./Document/material/24使用docker-compose进行单机集群启动.md)
 
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbsp
 ## Fabric环境搭建教程
 ##### [01 环境搭建](./Document/Fabric/环境搭建.md)
 
