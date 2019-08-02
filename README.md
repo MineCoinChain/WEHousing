@@ -241,9 +241,10 @@ __PS:__
 
 ##### [24 使用docker-compose进行单机集群启动](./Document/material/24使用docker-compose进行单机集群启动.md)
 
-    &nbsp &nbsp &nbsp
-    &nbsp &nbsp &nbsp
-    &nbsp &nbsp &nbsp
+  
+   
+       
+       
 ## Fabric环境搭建教程
 ##### [01 环境搭建](./Document/Fabric/环境搭建.md)
 
