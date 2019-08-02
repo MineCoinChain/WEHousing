@@ -239,20 +239,20 @@ __PS:__
 ##### [24 使用docker-compose进行单机集群启动](./Document/material/24使用docker-compose进行单机集群启动.md)
 
 ## Fabric环境搭建教程
-##### [01 环境搭建](./Document/Fabric/1.环境搭建.md)
+##### [01 环境搭建](./Document/Fabric/环境搭建.md)
 
-##### [02 Fabric介绍](./Document/Fabric/2.Fabric介绍.md)
+##### [02 Fabric介绍](./Document/Fabric/Fabric介绍.md)
 
-##### [03 Fabric核心模块](./Document/Fabric/3.Fabric核心模块.md)
+##### [03 Fabric核心模块](./Document/Fabric/Fabric核心模块.md)
 
-##### [04 Fabric网络搭建(手动)](./Document/Fabric/4.搭建网络-纯手动.md)
+##### [04 Fabric网络搭建(手动)](./Document/Fabric/搭建网络-纯手动.md)
 
-##### [05 Fabric网络搭建(脚本)](./Document/Fabric/5.网络搭建-脚本.md)
+##### [05 Fabric网络搭建(脚本)](./Document/Fabric/网络搭建-脚本.md)
 
-##### [06 智能合约](./Document/Fabric/6.智能合约.md)
+##### [06 智能合约](./Document/Fabric/智能合约.md)
 
-##### [07 Fabric账号机制](./Document/Fabric/7.Fabric账号.md)
+##### [07 Fabric账号机制](./Document/Fabric/Fabric账号.md)
 
-##### [08 Solo多机多节点部署](./Document/Fabric/8.solo多机多节点部署.md)
+##### [08 Solo多机多节点部署](./Document/Fabric/solo多机多节点部署.md)
 
-##### [09 Kafka多机多节点部署](./Document/Fabric/9.Kafka多级多节点部署.md)
+##### [09 Kafka多机多节点部署](./Document/Fabric/Kafka多级多节点部署.md)
